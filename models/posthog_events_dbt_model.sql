@@ -11,6 +11,7 @@ WITH EventData AS (
     event,
     JSON_EXTRACT_SCALAR(properties, "$['$session_id']") AS session_id,
     distinct_id,
+    JSON_EXTRACT_SCALAR(properties, "$['$host']") AS host,
     JSON_EXTRACT_SCALAR(properties, "$['$current_url']") AS current_url,
     JSON_EXTRACT_SCALAR(properties, "$['$initial_current_url']") AS initial_current_url,
     TIMESTAMP_TRUNC(timestamp, DAY) as dateCreated
@@ -19,6 +20,7 @@ WITH EventData AS (
   WHERE
     TIMESTAMP_TRUNC(timestamp, DAY) >= TIMESTAMP("2024-01-01")
     AND event = '$pageview'
+    AND JSON_EXTRACT_SCALAR(properties, "$['$host']") = "development-395907.web.app"
 )
 SELECT *
 FROM EventData
