@@ -14,7 +14,8 @@ WITH DevErrorEvents AS (
     TIMESTAMP_TRUNC(dateCreated, DAY) >= TIMESTAMP("2024-01-01")
     AND type = 'error'
     AND JSON_EXTRACT_SCALAR(tag, '$.key') = "environment"
-    AND JSON_EXTRACT_SCALAR(tag, '$.value') = "development"
+    -- AND JSON_EXTRACT_SCALAR(tag, '$.value') = "development"
+    AND JSON_EXTRACT_SCALAR(tag, '$.value') = "production"
 )
 SELECT
   dE._airbyte_raw_id as dE_airbyte_raw_id,

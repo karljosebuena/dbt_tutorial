@@ -20,7 +20,8 @@ WITH EventData AS (
   WHERE
     TIMESTAMP_TRUNC(timestamp, DAY) >= TIMESTAMP("2024-01-01")
     AND event = '$pageview'
-    AND JSON_EXTRACT_SCALAR(properties, "$['$host']") = "development-395907.web.app"
+    -- AND JSON_EXTRACT_SCALAR(properties, "$['$host']") = "development-395907.web.app"
+    AND JSON_EXTRACT_SCALAR(properties, "$['$host']") = "proceso-portal.web.app"
 )
 SELECT *
 FROM EventData
