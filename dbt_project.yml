@@ -31,5 +31,5 @@ clean-targets: # directories to be removed by `dbt clean`
 models:
   dbt_demo_bigquery:
     # Config indicated by + and applies to all files under models/example/
-    example:
+    views:
       +materialized: view
