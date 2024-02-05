@@ -1,10 +1,10 @@
 SELECT
-  COUNT(*) AS row_count,
-  tags_pivoted.url,
-  tags_pivoted.transaction,
-  CONCAT(tags_pivoted.url, tags_pivoted.transaction) as full_url,
-  MAX(dateCreated) as last_transaction
-FROM `development-395907.dbt_demo_bigquery.sentry_events_dbt_model`
-GROUP BY
-  tags_pivoted.url,
-  tags_pivoted.transaction
+  pV.full_url,
+  pV.current_url as operation,
+  pV.row_count as total_transactions,
+  pV.row_count - sV.row_count as success,
+  sV.row_count as issues,
+  pV.last_transaction
+ FROM `development-395907.dbt_demo_bigquery.posthog_events_dbt_view` pV
+  INNER JOIN `development-395907.dbt_demo_bigquery.sentry_events_dbt_view` sV
+    ON pV.full_url = sV.full_url
