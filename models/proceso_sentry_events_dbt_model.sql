@@ -11,10 +11,9 @@ WITH DevErrorEvents AS (
     `development-395907.sentry_airbyte_bigquery_sync.events`,
     UNNEST(JSON_EXTRACT_ARRAY(tags, '$')) AS tag
   WHERE
-    TIMESTAMP_TRUNC(dateCreated, DAY) >= TIMESTAMP("2024-01-01")
+    TIMESTAMP_TRUNC(dateCreated, DAY) >= TIMESTAMP("2024-02-01")
     AND type = 'error'
     AND JSON_EXTRACT_SCALAR(tag, '$.key') = "environment"
-    -- AND JSON_EXTRACT_SCALAR(tag, '$.value') = "development"
     AND JSON_EXTRACT_SCALAR(tag, '$.value') = "production"
 )
 SELECT
@@ -25,7 +24,7 @@ SELECT
   pE.event_type,
   pE.tags,
   pE.title,
-  pE.dateCreated,
+  pE.dateCreated as date_created,
   (SELECT AS STRUCT
     MAX(IF(JSON_EXTRACT_SCALAR(tag, '$.key') = 'browser', JSON_EXTRACT_SCALAR(tag, '$.value') , NULL)) AS browser,
     MAX(IF(JSON_EXTRACT_SCALAR(tag, '$.key') = 'browser.name', JSON_EXTRACT_SCALAR(tag, '$.value'), NULL)) AS browser_name,

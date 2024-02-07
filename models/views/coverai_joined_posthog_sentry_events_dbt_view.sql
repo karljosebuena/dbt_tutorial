@@ -5,6 +5,6 @@ SELECT
   pV.row_count - sV.row_count as success,
   sV.row_count as issues,
   pV.last_transaction
- FROM `development-395907.dbt_demo_bigquery.posthog_events_dbt_view` pV
-  INNER JOIN `development-395907.dbt_demo_bigquery.sentry_events_dbt_view` sV
+ FROM `development-395907.dbt_demo_bigquery.coverai_posthog_events_dbt_view` pV
+  INNER JOIN `development-395907.dbt_demo_bigquery.coverai_sentry_events_dbt_view` sV
     ON pV.full_url = sV.full_url
