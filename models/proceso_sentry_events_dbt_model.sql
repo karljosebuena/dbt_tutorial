@@ -14,17 +14,17 @@ WITH DevErrorEvents AS (
     TIMESTAMP_TRUNC(dateCreated, DAY) >= TIMESTAMP("2024-02-01")
     AND type = 'error'
     AND JSON_EXTRACT_SCALAR(tag, '$.key') = "environment"
-    AND JSON_EXTRACT_SCALAR(tag, '$.value') = "production"
+    AND JSON_EXTRACT_SCALAR(tag, '$.value') = "development"
 )
 SELECT
-  dE._airbyte_raw_id as dE_airbyte_raw_id,
-  pE._airbyte_raw_id as pE_airbyte_raw_id,
-  pE.id,
-  pE.eventID,
-  pE.event_type,
-  pE.tags,
-  pE.title,
-  pE.dateCreated as date_created,
+  -- dE._airbyte_raw_id as dE_airbyte_raw_id,
+  sE._airbyte_raw_id,
+  sE.id,
+  sE.eventID,
+  sE.event_type,
+  sE.tags,
+  sE.title,
+  sE.dateCreated as date_created,
   (SELECT AS STRUCT
     MAX(IF(JSON_EXTRACT_SCALAR(tag, '$.key') = 'browser', JSON_EXTRACT_SCALAR(tag, '$.value') , NULL)) AS browser,
     MAX(IF(JSON_EXTRACT_SCALAR(tag, '$.key') = 'browser.name', JSON_EXTRACT_SCALAR(tag, '$.value'), NULL)) AS browser_name,
@@ -42,8 +42,8 @@ SELECT
     MAX(IF(JSON_EXTRACT_SCALAR(tag, '$.key') = 'transaction', JSON_EXTRACT_SCALAR(tag, '$.value'), NULL)) AS transaction,
     MAX(IF(JSON_EXTRACT_SCALAR(tag, '$.key') = 'url', JSON_EXTRACT_SCALAR(tag, '$.value'), NULL)) AS url,
     MAX(IF(JSON_EXTRACT_SCALAR(tag, '$.key') = 'user', JSON_EXTRACT_SCALAR(tag, '$.value'), NULL)) AS user
-  FROM  UNNEST(JSON_EXTRACT_ARRAY(pE.tags, '$')) AS tag
+  FROM  UNNEST(JSON_EXTRACT_ARRAY(sE.tags, '$')) AS tag
   ) AS tags_pivoted
-  FROM `development-395907.sentry_airbyte_bigquery_sync.events` pE
-    INNER JOIN DevErrorEvents dE ON dE._airbyte_raw_id = pE._airbyte_raw_id
-ORDER BY pE.dateCreated
+  FROM `development-395907.sentry_airbyte_bigquery_sync.events` sE
+    INNER JOIN DevErrorEvents dE ON dE._airbyte_raw_id = sE._airbyte_raw_id
+ORDER BY sE.dateCreated

@@ -20,12 +20,8 @@ WITH EventData AS (
   WHERE
     TIMESTAMP_TRUNC(timestamp, DAY) >= TIMESTAMP("2024-02-01")
     AND event = '$pageview'
-    AND JSON_EXTRACT_SCALAR(properties, "$['$host']") = "app.proceso.com.au"
+    AND JSON_EXTRACT_SCALAR(properties, "$['$host']") = "development-395907.web.app"
 )
 SELECT *
 FROM EventData
-WHERE NOT (
-  REGEXP_CONTAINS(current_url, r'localhost')
-  OR REGEXP_CONTAINS(current_url, r'127.0.0.1')
-)
 ORDER BY date_created, session_id
