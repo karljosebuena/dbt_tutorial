@@ -1,6 +1,6 @@
 SELECT
   pV.full_url,
-  pV.current_url as operation,
+  UPPER(SUBSTR(pV.current_url, 2, 1)) || LOWER(SUBSTR(pV.current_url, 3)) AS operation,
   pV.row_count as total_transactions,
   pV.row_count - sV.row_count as success,
   sV.row_count as issues,
