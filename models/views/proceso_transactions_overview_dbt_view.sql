@@ -13,4 +13,4 @@ IndividualRows AS (
   UNION ALL
   SELECT 'Issues' AS metric, issues_sum AS value FROM CTE
 )
-SELECT * FROM IndividualRows;
+SELECT * FROM IndividualRows
