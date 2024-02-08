@@ -4,7 +4,7 @@
     )
 }}
 
-WITH DevErrorEvents AS (
+WITH EventData AS (
   SELECT
     _airbyte_raw_id,
   FROM
@@ -45,5 +45,5 @@ SELECT
   FROM  UNNEST(JSON_EXTRACT_ARRAY(sE.tags, '$')) AS tag
   ) AS tags_pivoted
   FROM `development-395907.sentry_airbyte_bigquery_sync.events` sE
-    INNER JOIN DevErrorEvents dE ON dE._airbyte_raw_id = sE._airbyte_raw_id
+    INNER JOIN EventData dE ON dE._airbyte_raw_id = sE._airbyte_raw_id
 ORDER BY sE.dateCreated
