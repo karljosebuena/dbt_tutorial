@@ -7,4 +7,4 @@ SELECT
   FORMAT_TIMESTAMP('%b %e, %Y %I:%M %p', pV.last_transaction) as `Last Transaction`
  FROM `development-395907.dbt_demo_bigquery.proceso_posthog_events_dbt_view` pV
   INNER JOIN `development-395907.dbt_demo_bigquery.proceso_sentry_events_dbt_view` sV
-    ON pV.full_url = sV.full_url;
+    ON pV.full_url = sV.full_url
