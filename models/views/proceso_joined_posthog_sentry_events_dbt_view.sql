@@ -4,7 +4,8 @@ SELECT
   pV.row_count as total_transactions,
   pV.row_count - sV.row_count as success,
   sV.row_count as issues,
-  FORMAT_TIMESTAMP('%b %e, %Y %I:%M %p', pV.last_transaction) as last_transaction
+  FORMAT_TIMESTAMP('%b %e, %Y %I:%M %p', pV.last_transaction) as last_transaction,
+  pV.last_transaction as raw_last_transaction
  FROM `development-395907.dbt_demo_bigquery.proceso_posthog_events_dbt_view` pV
   INNER JOIN `development-395907.dbt_demo_bigquery.proceso_sentry_events_dbt_view` sV
     ON pV.full_url = sV.full_url
