@@ -8,5 +8,5 @@ WITH PROCESO_TRANSACTIONS_OVERVIEW_CTE AS (
 )
 SELECT
   success_sum as `SUCCESS`,
-  issues_sum as `Issues`
+  issues_sum as `ISSUES`
 FROM PROCESO_TRANSACTIONS_OVERVIEW_CTE
