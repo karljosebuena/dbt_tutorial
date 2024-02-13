@@ -19,7 +19,7 @@ WITH EventData AS (
     `development-395907.posthog_airbyte_bigquery_sync.events`
   WHERE
     TIMESTAMP_TRUNC(timestamp, DAY) >= TIMESTAMP("2024-02-01")
-    AND event = '$pageview'
+    -- AND event = '$pageview' -- remove this filter
     AND JSON_EXTRACT_SCALAR(properties, "$['$host']") = "development-395907.web.app"
 )
 SELECT *
