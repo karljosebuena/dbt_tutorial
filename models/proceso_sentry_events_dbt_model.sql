@@ -17,14 +17,13 @@ WITH EventData AS (
     AND JSON_EXTRACT_SCALAR(tag, '$.value') = "development"
 )
 SELECT
-  -- dE._airbyte_raw_id as dE_airbyte_raw_id,
   sE._airbyte_raw_id,
   sE.id,
   sE.eventID,
   sE.event_type,
   sE.tags,
   sE.title,
-  sE.dateCreated as date_created,
+  FORMAT_TIMESTAMP('%Y-%m-%d %I:%M:%S %p', sE.dateCreated) as date_created,
   (SELECT AS STRUCT
     MAX(IF(JSON_EXTRACT_SCALAR(tag, '$.key') = 'browser', JSON_EXTRACT_SCALAR(tag, '$.value') , NULL)) AS browser,
     MAX(IF(JSON_EXTRACT_SCALAR(tag, '$.key') = 'browser.name', JSON_EXTRACT_SCALAR(tag, '$.value'), NULL)) AS browser_name,
