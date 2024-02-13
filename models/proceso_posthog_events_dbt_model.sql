@@ -14,7 +14,7 @@ WITH EventData AS (
     JSON_EXTRACT_SCALAR(properties, "$['$host']") AS host,
     JSON_EXTRACT_SCALAR(properties, "$['$current_url']") AS current_url,
     JSON_EXTRACT_SCALAR(properties, "$['$initial_current_url']") AS initial_current_url,
-    TIMESTAMP_TRUNC(timestamp, DAY) as date_created
+    FORMAT_TIMESTAMP('%Y-%m-%d %I:%M:%S %p', timestamp) as date_created
   FROM
     `development-395907.posthog_airbyte_bigquery_sync.events`
   WHERE
