@@ -5,7 +5,7 @@ SELECT
   pV.row_count - sV.row_count AS `Success`,
   sV.row_count AS `Issues`,
   pV.last_transaction AS `Last Transaction`,
-  CONCAT("<a href='https://covertech-873987ba3.sentry.io/issues/?environment=development&project=4505878431268864&query=is%3Aunresolved+url%3A%22https%3A%2F%2Fdevelopment-395907.web.app%2Fquotes%22&referrer=issue-list&statsPeriod=30d'>View Issues</a>") AS `View Issues`
+  CONCAT("<a href='https://covertech-873987ba3.sentry.io/issues/?environment=development&project=4505878431268864&query=is%3Aunresolved+url%3A%22", pV.full_url, "%22&referrer=issue-list&statsPeriod=30d'>View Issues</a>") AS `View Issues`
 FROM
   `development-395907.dbt_demo_bigquery.proceso_posthog_events_dbt_view` pV
 INNER JOIN
