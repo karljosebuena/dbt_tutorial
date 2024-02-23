@@ -7,8 +7,6 @@ SELECT
     THEN current_url
     ELSE CONCAT('https://', host, current_url)
   END AS full_url,
-  user_name,
-  user_email,
   MAX(date_created) as last_transaction
 FROM
   `development-395907.dbt_demo_bigquery.proceso_posthog_events_dbt_model`
