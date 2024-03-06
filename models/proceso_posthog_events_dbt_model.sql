@@ -11,7 +11,7 @@ WITH EventData AS (
     event,
     distinct_id,
     JSON_EXTRACT_SCALAR(properties, '$.req.protocol') AS protocol,
-    JSON_EXTRACT_SCALAR(properties, '$.req.hostname') AS host_name,
+    JSON_EXTRACT_SCALAR(properties, '$.req.host') AS host,
     JSON_EXTRACT_SCALAR(properties, '$.req.baseUrl') AS base_url,
     JSON_EXTRACT_SCALAR(properties, '$.req.path') AS path,
     JSON_EXTRACT_SCALAR(properties, '$.req.originalUrl') AS original_url,
@@ -26,10 +26,10 @@ WITH EventData AS (
   WHERE
     TIMESTAMP_TRUNC(timestamp, DAY) >= TIMESTAMP("2024-01-01")
     AND event = 'Proceso Backend'
-    -- AND JSON_EXTRACT_SCALAR(properties, '$.req.hostname') = 'development-395907.web.app'
+    -- AND JSON_EXTRACT_SCALAR(properties, '$.req.host') = 'development-395907.web.app'
     AND (
-      JSON_EXTRACT_SCALAR(properties, '$.req.hostname') = 'localhost'
-      OR JSON_EXTRACT_SCALAR(properties, '$.req.hostname') = '127.0.0.1'
+      JSON_EXTRACT_SCALAR(properties, '$.req.host') = 'localhost'
+      OR JSON_EXTRACT_SCALAR(properties, '$.req.host') = '127.0.0.1'
     )
 )
 SELECT *
