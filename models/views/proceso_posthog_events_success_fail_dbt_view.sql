@@ -28,12 +28,12 @@ FAIL_CTE AS (
 )
 
 SELECT
-  UPPER(SUBSTR(sc.base_url, 2, 1)) || LOWER(SUBSTR(sc.base_url, 3)) AS `OPERATION`,
+  UPPER(SUBSTR(sc.base_url, 2, 1)) || LOWER(SUBSTR(sc.base_url, 3)) AS `operation`,
   sc.original_url,
-  sc.full_url AS `URL`,
-  COALESCE(sc.row_count, 0) + COALESCE(fc.row_count, 0) AS `TOTAL TRANSACTIONS`,
-  sc.row_count AS `Success`,
-  fc.row_count AS `ISSUES`,
-  sc.last_transaction AS `LAST TRANSACTION`
+  sc.full_url,
+  COALESCE(sc.row_count, 0) + COALESCE(fc.row_count, 0) AS `total_transactions`,
+  sc.row_count AS `success_count`,
+  fc.row_count AS `fail_count`,
+  sc.last_transaction AS `last_transaction`
 FROM SUCCESS_CTE sc
   LEFT JOIN FAIL_CTE fc ON sc.base_url = fc.base_url
