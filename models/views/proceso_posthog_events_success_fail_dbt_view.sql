@@ -31,9 +31,9 @@ SELECT
   UPPER(SUBSTR(sc.base_url, 2, 1)) || LOWER(SUBSTR(sc.base_url, 3)) AS `OPERATION`,
   sc.original_url,
   sc.full_url AS `URL`,
-  sc.row_count +  fc.row_count AS `TOTAL TRANSACTIONS`,
-  sc.row_count AS success_count AS `Success`,
-  fc.row_count AS fail_count AS `ISSUES`,
+  COALESCE(sc.row_count, 0) + COALESCE(fc.row_count, 0) AS `TOTAL TRANSACTIONS`,
+  sc.row_count AS `Success`,
+  fc.row_count AS `ISSUES`,
   sc.last_transaction AS `LAST TRANSACTION`
 FROM SUCCESS_CTE sc
   LEFT JOIN FAIL_CTE fc ON sc.base_url = fc.base_url
