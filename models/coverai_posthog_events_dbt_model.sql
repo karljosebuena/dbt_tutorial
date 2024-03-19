@@ -25,8 +25,13 @@ WITH EventData AS (
     `development-395907.posthog_airbyte_bigquery_sync.events`
   WHERE
     TIMESTAMP_TRUNC(timestamp, DAY) >= TIMESTAMP("2024-01-01")
-    AND event = 'Proceso Backend'
-    AND JSON_EXTRACT_SCALAR(properties, '$.req.host') = 'api.proceso.com.au'
+    AND event = 'CoverAI Backend'
+    -- AND JSON_EXTRACT_SCALAR(properties, '$.req.host') = 'procesoportalv2-5aa2zjftgq-ts.a.run.app'
+    -- AND JSON_EXTRACT_SCALAR(properties, '$.req.host') = 'api.proceso.com.au'
+    AND (
+      JSON_EXTRACT_SCALAR(properties, '$.req.host') LIKE '%localhost%'
+      OR JSON_EXTRACT_SCALAR(properties, '$.req.host') = '%127.0.0.1%'
+    )
 )
 SELECT *
 FROM EventData
