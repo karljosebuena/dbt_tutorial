@@ -8,7 +8,7 @@ WITH SUCCESS_CTE AS (
       MAX(status_code) AS status_code,
       MAX(date_created) AS last_transaction
     FROM
-      `development-395907.dbt_demo_bigquery.proceso_posthog_events_dbt_model`
+      `development-395907.dbt_demo_bigquery.coverai_posthog_events_dbt_model`
     WHERE LENGTH(TRIM(base_url)) > 0 AND PARSE_NUMERIC(status_code) >= 200 AND PARSE_NUMERIC(status_code) <= 204
     GROUP BY
       base_url
@@ -23,7 +23,7 @@ FAIL_CTE AS (
       MAX(status_code) AS status_code,
       MAX(date_created) AS last_transaction
     FROM
-      `development-395907.dbt_demo_bigquery.proceso_posthog_events_dbt_model`
+      `development-395907.dbt_demo_bigquery.coverai_posthog_events_dbt_model`
     WHERE LENGTH(TRIM(base_url)) > 0 AND (PARSE_NUMERIC(status_code) < 200 OR PARSE_NUMERIC(status_code) > 204)
     GROUP BY
       base_url
