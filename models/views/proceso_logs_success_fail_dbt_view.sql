@@ -27,10 +27,10 @@ SELECT
   UPPER(SUBSTR(COALESCE(SUCCESS_CTE.url, FAIL_CTE.url), 2, 1)) || LOWER(SUBSTR(COALESCE(SUCCESS_CTE.url, FAIL_CTE.url), 3)) AS `OPERATION`,
   COALESCE(SUCCESS_CTE.host, FAIL_CTE.host) AS host,
   COALESCE(SUCCESS_CTE.url, FAIL_CTE.url) AS url,
-  COALESCE(SUCCESS_CTE.row_count, 0) + COALESCE(FAIL_CTE.row_count, 0) AS `TOTAL TRANSACTIONS`,
-  COALESCE(SUCCESS_CTE.row_count, 0) AS `SUCCESS`,
-  COALESCE(FAIL_CTE.row_count, 0) AS `ISSUES`,
+  COALESCE(SUCCESS_CTE.row_count, 0) + COALESCE(FAIL_CTE.row_count, 0) AS `total_transactions`,
+  COALESCE(SUCCESS_CTE.row_count, 0) AS `success_count`,
+  COALESCE(FAIL_CTE.row_count, 0) AS `fail_count`,
   COALESCE(SUCCESS_CTE.last_transaction, FAIL_CTE.last_transaction) AS last_transaction,
-  CONCAT("<a href='https://covertech-873987ba3.sentry.io/issues/?environment=prod&project=4505878638559232&query=is%3Aunresolved+url%3A%22", "*", COALESCE(SUCCESS_CTE.host, FAIL_CTE.host) || COALESCE(SUCCESS_CTE.base_url, FAIL_CTE.base_url), "*", "%22&referrer=issue-list&statsPeriod=30d'>View Issues</a>") AS `ACTION`
+  CONCAT("<a href='https://covertech-873987ba3.sentry.io/issues/?environment=prod&project=4505878638559232&query=is%3Aunresolved+url%3A%22", "*", COALESCE(SUCCESS_CTE.host, FAIL_CTE.host) || COALESCE(SUCCESS_CTE.base_url, FAIL_CTE.base_url), "*", "%22&referrer=issue-list&statsPeriod=30d'>View Issues</a>") AS `view_issues`
 FROM SUCCESS_CTE
 FULL OUTER JOIN FAIL_CTE ON SUCCESS_CTE.base_url = FAIL_CTE.base_url
