@@ -1,7 +1,7 @@
 {{
     config(
         materialized='table',
-        database='development-395907.dbt_demo_bigquery',
+        database='custom_dataset',
     )
 }}
 
