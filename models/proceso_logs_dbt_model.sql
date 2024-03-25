@@ -1,7 +1,7 @@
 {{
     config(
         materialized='table',
-        database='custom_dataset',
+        database='development-395907',
     )
 }}
 
