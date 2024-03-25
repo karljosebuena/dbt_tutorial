@@ -39,6 +39,6 @@ clean-targets: # directories to be removed by `dbt clean`
 #       schema: posthog_airbyte_bigquery_sync
 
 models:
-  development-395907:
-    +schema: dbt_demo_bigquery
-    +database: development-395907.dbt_demo_bigquery
+  proceso_logs:
+    +schema: proceso_logs
+    +database: development-395907.proceso_logs
