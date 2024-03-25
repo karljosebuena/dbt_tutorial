@@ -1,9 +1,3 @@
-{{
-    config(
-        materialized='table'
-    )
-}}
-
 WITH EventData AS (
   SELECT
   timestamp,
