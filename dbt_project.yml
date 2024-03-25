@@ -32,3 +32,5 @@ models:
   dbt_demo_bigquery:
     proceso_logs:
         +materialized: table
+        views:
+          +materialized: view
