@@ -1,6 +1,7 @@
 {{
     config(
-        materialized='table'
+        materialized='table',
+        database='dbt_demo_bigquery'
     )
 }}
 
