@@ -4,7 +4,7 @@ WITH PROCESO_LOGS_TRANSACTIONS_OVERVIEW_CTE AS (
     SUM(success_count) AS success_sum,
     SUM(fail_count) AS issues_sum
   FROM
-    `development-395907.dbt_demo_bigquery.proceso_logs_success_fail_dbt_view`
+    `development-395907.logs.proceso_logs_success_fail_dbt_view`
 ),
 IndividualRows AS (
   SELECT 'Success' AS metric, success_sum AS value FROM PROCESO_LOGS_TRANSACTIONS_OVERVIEW_CTE
