@@ -1,9 +1,8 @@
--- {{
---     config(
---         materialized='table',
---         database='development-395907',
---     )
--- }}
+{{
+    config(
+        materialized='table'
+    )
+}}
 
 WITH EventData AS (
   SELECT
