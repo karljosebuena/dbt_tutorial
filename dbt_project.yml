@@ -29,10 +29,10 @@ clean-targets: # directories to be removed by `dbt clean`
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
 models:
-  development-395907:
+  dbt_demo_bigquery:
     proceso_logs_dbt_model:
-      database: proceso_logs
-      schema: _AllLogs
+      database: development-395907
+      schema: proceso_logs
     proceso_posthog_events_dbt_model:
-      database: posthog_airbyte_bigquery_sync
-      schema: events
+      database: development-395907
+      schema: dbt_demo_bigquery
