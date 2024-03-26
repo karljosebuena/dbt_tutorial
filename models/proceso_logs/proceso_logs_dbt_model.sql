@@ -9,7 +9,7 @@ WITH EventData AS (
   JSON_EXTRACT_SCALAR(json_payload, '$.res.statusCode') as status_code,
   JSON_EXTRACT_SCALAR(json_payload, '$.responseTime') as response_time,
   JSON_EXTRACT_SCALAR(json_payload, '$.req.url') as url,
-  REGEXP_EXTRACT(JSON_EXTRACT_SCALAR(json_payload, '$.req.url'), r'/(?P<word>[^/]+)/') AS route
+  REGEXP_EXTRACT(JSON_EXTRACT_SCALAR(json_payload, '$.req.url'), r'^/([^/]+)/?(?:[^/]*)') as route
   FROM
     `development-395907.proceso_logs._AllLogs`
   WHERE
